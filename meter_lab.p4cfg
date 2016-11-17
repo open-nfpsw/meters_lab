@@ -1,0 +1,134 @@
+{
+    "tables": {
+        "forward": {
+            "rules": [
+                {
+                    "action": {
+                        "data": {
+                            "espec": {
+                                "value": "v0.1"
+                            }
+                        }, 
+                        "type": "do_forward"
+                    }, 
+                    "name": "v0_v1", 
+                    "match": {
+                        "standard_metadata.ingress_port": {
+                            "value": "v0.0"
+                        }
+                    }
+                }, 
+                {
+                    "action": {
+                        "data": {
+                            "espec": {
+                                "value": "v0.0"
+                            }
+                        }, 
+                        "type": "do_forward"
+                    }, 
+                    "name": "v1_v0", 
+                    "match": {
+                        "standard_metadata.ingress_port": {
+                            "value": "v0.1"
+                        }
+                    }
+                }, 
+                {
+                    "action": {
+                        "data": {
+                            "espec": {
+                                "value": "v0.3"
+                            }
+                        }, 
+                        "type": "do_forward"
+                    }, 
+                    "name": "p0_v3", 
+                    "match": {
+                        "standard_metadata.ingress_port": {
+                            "value": "p0"
+                        }
+                    }
+                }, 
+                {
+                    "action": {
+                        "data": {
+                            "espec": {
+                                "value": "p0"
+                            }
+                        }, 
+                        "type": "do_forward"
+                    }, 
+                    "name": "v3_p0", 
+                    "match": {
+                        "standard_metadata.ingress_port": {
+                            "value": "v0.3"
+                        }
+                    }
+                }
+            ], 
+            "default_rule": {
+                "action": {
+                    "type": "drop_act"
+                }, 
+                "name": "default"
+            }
+        }, 
+        "forward_vlan": {
+            "rules": [
+                {
+                    "action": {
+                        "data": {
+                            "meter_idx": {
+                                "value": "0"
+                            }
+                        }, 
+                        "type": "do_throttle"
+                    }, 
+                    "name": "vlan100", 
+                    "match": {
+                        "vlan.vid": {
+                            "value": "100"
+                        }
+                    }
+                }, 
+                {
+                    "action": {
+                        "data": {
+                            "meter_idx": {
+                                "value": "1"
+                            }
+                        }, 
+                        "type": "do_throttle"
+                    }, 
+                    "name": "vlan101", 
+                    "match": {
+                        "vlan.vid": {
+                            "value": "101"
+                        }
+                    }
+                }
+            ]
+        }
+    }, 
+    "meters": {
+        "configs": [
+            {
+                "count": 1, 
+                "index": 0, 
+                "name": "gold", 
+                "burst_k": 10, 
+                "meter": "vf_meters", 
+                "rate_k": 3.5
+            }, 
+            {
+                "count": 1, 
+                "index": 1, 
+                "name": "low", 
+                "burst_k": 1, 
+                "meter": "vf_meters", 
+                "rate_k": 0.1
+            }
+        ]
+    }
+}
