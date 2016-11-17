@@ -1,4 +1,20 @@
-Meters lab
+Meters example
+
+This lab shows how to use meter in P4 by:
+	- match vlan traffic with meters
+	- update meters dynamically
+
+
+How to get started:
+
+	1. create a new P4 project 
+	2. import meter_lab.p4 (source code)
+	3. import meter_lab.p4cfg (configuration file)
+	4. download config.sh to your traffic generation server 
+	5. follow steps below to configure and test meters
+
+
+From traffic generation server:
 
 # need to sudo 
 su
